@@ -21,6 +21,7 @@ public class DataHelper extends SQLiteOpenHelper {
                 COLUMN_PESO + " DECIMAL)";
         final String SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + TABLE_NAME;
 
+
     }
 
     @Override
@@ -31,10 +32,12 @@ public class DataHelper extends SQLiteOpenHelper {
                 COLUMN_PESO + " DECIMAL)";
         db.execSQL(SQL_CREATE_ENTRIES);
 
+
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+
 
     }
 }

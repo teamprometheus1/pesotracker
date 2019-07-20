@@ -1,9 +1,12 @@
 package adv.dantoniopeluso.weighttracker;
 
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
@@ -27,12 +30,28 @@ public class MainActivity extends AppCompatActivity {
         String dataDehoje = findViewById(R.id.txtdate).toString();
         String pesoDeHoje = findViewById(R.id.txtweight).toString();
 //        float pesoDeHojeFinal = Float.parseFloat(pesoDeHoje);
-        DataHelper = new DataHelper(this);
+//        DataHelper = new DataHelper(this);
 //        DataHelper.addData(dataDehoje, 97);
+        DataHelper = new DataHelper(this);
     }
 
     public void onClick(View view){
         Button btn1 = findViewById(R.id.btnsave);
+        Calendar cal = Calendar.getInstance();
+        TextView textdate = findViewById(R.id.txtdate);
+        textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.YEAR));
+        String dataDehoje = findViewById(R.id.txtdate).toString();
+        SQLiteDatabase db = DataHelper.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        EditText mEdit = findViewById(R.id.txtweight);
+        String pesoDeHoje = mEdit.getText().toString();
+        double pesoDeHojeFinal = Float.parseFloat(pesoDeHoje);
+        System.out.println(pesoDeHoje);
+        System.out.println(pesoDeHojeFinal);
+        contentValues.put(DataHelperContract.DataEntry.COLUMN_DATE, dataDehoje);
+        contentValues.put(DataHelperContract.DataEntry.COLUMN_PESO, pesoDeHoje);
+        mEdit.setText("");
+
     }
 
 
