@@ -48,7 +48,8 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(DataHelperContract.DataEntry.COLUMN_DATE, dataDehoje);
         contentValues.put(DataHelperContract.DataEntry.COLUMN_PESO, pesoDeHoje);
         mEdit.setText("");
-        //TODO implementar troca de tela, list view e grafico
+        setContentView(R.layout.activity_ver_pesos);
+        //TODO implementar list view e grafico
 
     }
 
