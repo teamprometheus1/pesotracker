@@ -29,9 +29,6 @@ public class MainActivity extends AppCompatActivity {
         textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.YEAR));
         String dataDehoje = findViewById(R.id.txtdate).toString();
         String pesoDeHoje = findViewById(R.id.txtweight).toString();
-//        float pesoDeHojeFinal = Float.parseFloat(pesoDeHoje);
-//        DataHelper = new DataHelper(this);
-//        DataHelper.addData(dataDehoje, 97);
         DataHelper = new DataHelper(this);
     }
 
@@ -51,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         contentValues.put(DataHelperContract.DataEntry.COLUMN_DATE, dataDehoje);
         contentValues.put(DataHelperContract.DataEntry.COLUMN_PESO, pesoDeHoje);
         mEdit.setText("");
+        //TODO implementar troca de tela, list view e grafico
 
     }
 
