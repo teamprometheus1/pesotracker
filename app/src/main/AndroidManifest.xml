@@ -11,7 +11,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".VerPesos"></activity>
+        <activity android:name=".Grafico"></activity>
+        <activity android:name="adv.dantoniopeluso.listviewertest.listviewer" />
+        <activity android:name=".VerPesos" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

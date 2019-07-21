@@ -1,19 +1,25 @@
 package adv.dantoniopeluso.weighttracker;
 
 import android.content.ContentValues;
+import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.OnLifecycleEvent;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,35 +29,66 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Button btn1 = findViewById(R.id.btnsave);
         Calendar cal = Calendar.getInstance();
         TextView textdate = findViewById(R.id.txtdate);
         textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.YEAR));
         String dataDehoje = findViewById(R.id.txtdate).toString();
         String pesoDeHoje = findViewById(R.id.txtweight).toString();
         DataHelper = new DataHelper(this);
+
     }
+
+
 
     public void onClick(View view){
-        Button btn1 = findViewById(R.id.btnsave);
-        Calendar cal = Calendar.getInstance();
-        TextView textdate = findViewById(R.id.txtdate);
-        textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH)+1) + " - " + cal.get(Calendar.YEAR));
-        String dataDehoje = findViewById(R.id.txtdate).toString();
-        SQLiteDatabase db = DataHelper.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        EditText mEdit = findViewById(R.id.txtweight);
-        String pesoDeHoje = mEdit.getText().toString();
-        double pesoDeHojeFinal = Float.parseFloat(pesoDeHoje);
-        System.out.println(pesoDeHoje);
-        System.out.println(pesoDeHojeFinal);
-        contentValues.put(DataHelperContract.DataEntry.COLUMN_DATE, dataDehoje);
-        contentValues.put(DataHelperContract.DataEntry.COLUMN_PESO, pesoDeHoje);
-        mEdit.setText("");
-        setContentView(R.layout.activity_ver_pesos);
-        //TODO implementar list view e grafico
+        Button btn_voltar = (Button) findViewById(R.id.btn_voltar);
+        Button btnsave = (Button) findViewById(R.id.btnsave);
+        Button btngraph = (Button) findViewById(R.id.btn_graph);
+        Button btnprincipal = (Button) findViewById(R.id.btnPrincipal);
+
+        switch (view.getId()) {
+
+            case R.id.btnsave:
+
+                Calendar cal = Calendar.getInstance();
+                TextView textdate = findViewById(R.id.txtdate);
+                textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH) + 1) + " - " + cal.get(Calendar.YEAR));
+                String dataDehoje = findViewById(R.id.txtdate).toString();
+                SQLiteDatabase db = DataHelper.getWritableDatabase();
+                ContentValues contentValues = new ContentValues();
+                EditText mEdit = findViewById(R.id.txtweight);
+                String pesoDeHoje = mEdit.getText().toString();
+                double pesoDeHojeFinal = Float.parseFloat(pesoDeHoje);
+                System.out.println(pesoDeHoje);
+                System.out.println(pesoDeHojeFinal);
+                contentValues.put(DataHelperContract.DataEntry.COLUMN_DATE, dataDehoje);
+                contentValues.put(DataHelperContract.DataEntry.COLUMN_PESO, pesoDeHoje);
+                mEdit.setText("");
+                setContentView(R.layout.activity_ver_pesos);
+                //TODO implementar list view e grafico
+                break;
+
+            case R.id.btn_voltar:
+                setContentView(R.layout.activity_main);
+                cal = Calendar.getInstance();
+                textdate = findViewById(R.id.txtdate);
+                textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH) + 1) + " - " + cal.get(Calendar.YEAR));
+                break;
+            case R.id.btn_graph:
+                setContentView(R.layout.activity_grafico);
+                break;
+
+            case R.id.btnPrincipal:
+                setContentView(R.layout.activity_main);
+                cal = Calendar.getInstance();
+                textdate = findViewById(R.id.txtdate);
+                textdate.setText(cal.get(Calendar.DAY_OF_MONTH) + " - " + (cal.get(Calendar.MONTH) + 1) + " - " + cal.get(Calendar.YEAR));
+                break;
+
+
+
+        }
 
     }
-
 
 }
